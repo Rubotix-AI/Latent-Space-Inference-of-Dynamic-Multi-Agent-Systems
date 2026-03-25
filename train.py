@@ -1,6 +1,5 @@
-from utils import ae_optimizer, encoder, decoder, loss_fn
+from utils import ae_optimizer, encoder, decoder, loss_fn, lstm_optimizer, lstm_model, X_lstm, Y_lstm
 from graph_construct import graph_data
-from models.latent_lstm import lstm_optimizer, lstm_model, X_lstm, Y_lstm
 
 for epoch in range(50):
     total_loss = 0
