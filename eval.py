@@ -1,5 +1,5 @@
 import torch
-from models.latent_lstm import lstm_model, X_lstm, seq_len
+from utils import lstm_model, X_lstm, seq_len
 from utils import decoder
 from graph_construct import graph_data
 
