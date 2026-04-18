@@ -1,5 +1,4 @@
 import numpy as np
-import sys
 
 np.set_printoptions(precision=2) # displays truncated floats for all numpy vectors
 
@@ -8,6 +7,8 @@ DELTA_T = 1
 MAX_SEPERATION_VALUE = 1
 NUM_OF_BOIDS = 5
 NUM_OF_COORDS = 2
+X_BOUND = 5
+Y_BOUND = 5
 
 rng = np.random.default_rng(seed=SEED)
 
@@ -109,8 +110,8 @@ def create_boids(num_boids: int):
     for i in range(num_boids):
         curr = Agent(
             id=i,
-            pos=rng.random((NUM_OF_COORDS,)),
-            vel=rng.random((NUM_OF_COORDS,)),
+            pos=np.random.uniform(-X_BOUND, X_BOUND, size=(NUM_OF_COORDS,)),
+            vel=np.random.uniform(-Y_BOUND, Y_BOUND, size=(NUM_OF_COORDS,)),
             wander_radius=rng.random()
         )
         all_boids.append(curr)
@@ -135,4 +136,4 @@ print(sim)
 
 sim.update()
 
-print(sim)
+print("\n", sim)
