@@ -1,6 +1,7 @@
 import numpy as np
-from config import SEED, NUM_OF_COORDS, NUM_OF_BOIDS, MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND, DELTA_T
-from sim import Agent
+
+from simulation.boid_config import MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND
+from simulation.boid_models import Agent
 
 def seperation(diff: np.ndarray):
     return diff / max(np.linalg.norm(diff), MAX_SEPERATION_VALUE)
