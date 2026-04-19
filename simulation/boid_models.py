@@ -1,7 +1,7 @@
 import numpy as np
 
-from config import SEED, NUM_OF_COORDS, NUM_OF_BOIDS, MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND, DELTA_T
-from utils import cohesion, alignment, seperation, wrap
+from simulation.boid_config import SEED, NUM_OF_COORDS, DELTA_T
+from simulation.sim_utils import cohesion, alignment, seperation, wrap
 
 rng = np.random.default_rng(seed=SEED)
 
