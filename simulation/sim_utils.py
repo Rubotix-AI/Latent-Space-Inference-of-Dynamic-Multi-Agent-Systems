@@ -1,16 +1,15 @@
 import numpy as np
 
-from simulation.boid_config import MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND
-from simulation.boid_models import Agent
+from boid_config import MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND
 
 def seperation(diff: np.ndarray) -> np.ndarray:
     return diff / max(np.linalg.norm(diff), MAX_SEPERATION_VALUE)
 
-def alignment(boid: Agent) -> np.ndarray:
-    return boid.velocity
+def alignment(velocity: np.ndarray) -> np.ndarray:
+    return velocity
 
-def cohesion(boid: Agent) -> np.ndarray:
-    return boid.position
+def cohesion(position: np.ndarray) -> np.ndarray:
+    return position
 
 def wrap(vec: np.ndarray) -> np.ndarray:
     # shift

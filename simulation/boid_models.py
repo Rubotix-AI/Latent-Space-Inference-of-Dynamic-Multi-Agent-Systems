@@ -1,7 +1,7 @@
 import numpy as np
 
-from simulation.boid_config import SEED, NUM_OF_COORDS, DELTA_T
-from simulation.sim_utils import cohesion, alignment, seperation, wrap
+from boid_config import SEED, NUM_OF_COORDS, DELTA_T
+from sim_utils import cohesion, alignment, seperation, wrap
 
 rng = np.random.default_rng(seed=SEED)
 
@@ -34,6 +34,7 @@ class Simulation:
         ):
         self.boids = boids
         self.boid_count = boid_count
+        self.timestep = 0
         self.w_s = seperation
         self.w_c = cohesion
         self.w_a = alignment
@@ -64,6 +65,8 @@ class Simulation:
             boid.position += DELTA_T * boid.velocity
             wrap(boid.position)
 
+        self.timestep += 1
+
     def calculate_vecs(self, boid: Agent, neighbours: list[Agent]) -> list[np.ndarray]:
         sep_vec = np.zeros_like(boid.velocity)
         align_vec = np.zeros_like(boid.velocity)
@@ -78,15 +81,19 @@ class Simulation:
             if dist < self.r_s:
                 sep_vec -= seperation(diff)
             if dist < self.r_a:
-                align_vec += alignment(neighbour)
+                align_vec += alignment(neighbour.velocity)
                 count_a += 1
             if dist < self.r_c:
-                coh_vec += cohesion(neighbour)
+                coh_vec += cohesion(neighbour.position)
                 count_c += 1
         align_vec = ( align_vec / count_a ) - boid.velocity if count_a else align_vec
         coh_vec = ( coh_vec / count_c ) - boid.position if count_c else coh_vec
 
         return sep_vec, align_vec, coh_vec
     
+    def __iter__(self):
+        for boid in self.boids:
+            yield ( self.timestep, boid.id, *boid.position, *boid.velocity )
+
     def __str__(self):
         return "\n".join(str(boid) for boid in self.boids) + "\n-----------------------------------"
