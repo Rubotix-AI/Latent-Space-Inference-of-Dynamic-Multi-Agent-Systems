@@ -31,6 +31,17 @@ def alignment(boid: Agent):
 def cohesion(boid: Agent):
     return boid.position
 
+def wrap(vec: np.ndarray) -> np.ndarray:
+    # shift
+    vec[0] += X_BOUND
+    vec[1] += Y_BOUND
+    # mod
+    vec[0] %= (2 * X_BOUND + 1)
+    vec[1] %= (2 * Y_BOUND + 1)
+    # shift back 
+    vec[0] -= X_BOUND
+    vec[1] -= Y_BOUND
+
 class Simulation:
     def __init__(self, 
             boids: list[Agent], 
@@ -74,6 +85,7 @@ class Simulation:
             
             boid.velocity += DELTA_T * a_new
             boid.position += DELTA_T * boid.velocity
+            wrap(boid.position)
 
     def calculate_vecs(self, boid: Agent, neighbours: list[Agent]):
         sep_vec = np.zeros_like(boid.velocity)
@@ -82,22 +94,20 @@ class Simulation:
 
         count_a, count_c = 0, 0
         for neighbour in neighbours:
+            if neighbour == boid: # skip the boid itself
+                continue
             diff = neighbour.position - boid.position
             dist = np.linalg.norm(diff)
             if dist < self.r_s:
                 sep_vec -= seperation(diff)
             if dist < self.r_a:
-                align_vec += alignment(boid)
+                align_vec += alignment(neighbour)
                 count_a += 1
             if dist < self.r_c:
-                coh_vec += cohesion(boid)
+                coh_vec += cohesion(neighbour)
                 count_c += 1
-        
-        try:
-            align_vec = ( align_vec / count_a ) - boid.velocity
-            coh_vec = ( coh_vec / count_c ) - boid.position
-        except ZeroDivisionError as e:
-            print(f"Zero Division Error with Count: count_a, count_c --> {count_a, count_c}")
+        align_vec = ( align_vec / count_a ) - boid.velocity if count_a else align_vec
+        coh_vec = ( coh_vec / count_c ) - boid.position if count_c else coh_vec
 
         return sep_vec, align_vec, coh_vec
     
@@ -110,8 +120,8 @@ def create_boids(num_boids: int):
     for i in range(num_boids):
         curr = Agent(
             id=i,
-            pos=np.random.uniform(-X_BOUND, X_BOUND, size=(NUM_OF_COORDS,)),
-            vel=np.random.uniform(-Y_BOUND, Y_BOUND, size=(NUM_OF_COORDS,)),
+            pos=rng.uniform(-X_BOUND, X_BOUND, size=(NUM_OF_COORDS,)),
+            vel=rng.uniform(-Y_BOUND, Y_BOUND, size=(NUM_OF_COORDS,)),
             wander_radius=rng.random()
         )
         all_boids.append(curr)
@@ -126,14 +136,12 @@ sim = Simulation(
     alignment=0.5,
     cohesion=0.5,
     wander=0.5,
-    sep_radius=1.,
-    coh_radius=1.,
-    align_radius=1.,
+    sep_radius=2.,
+    coh_radius=2.,
+    align_radius=2.,
     wander_radius=1.
 )
 
-print(sim)
-
-sim.update()
-
-print("\n", sim)
+for _ in range(10):
+    print(sim)
+    sim.update()
