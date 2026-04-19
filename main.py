@@ -20,7 +20,10 @@ class Agent:
         self.wander = wander_radius * ( rng.random((NUM_OF_COORDS,)) - 0.5 * np.ones((NUM_OF_COORDS,)) )
     
     def __str__(self):
-        return f"{self.id} --> Position: {self.position} Velocity: {self.velocity} Wander: {self.wander}"
+        return f"""{self.id}
+    Position: {self.position}
+    Velocity: {self.velocity}
+    Wander: {self.wander}"""
 
 def seperation(diff: np.ndarray):
     return diff / max(np.linalg.norm(diff), MAX_SEPERATION_VALUE)
@@ -112,7 +115,7 @@ class Simulation:
         return sep_vec, align_vec, coh_vec
     
     def __str__(self):
-        return "\n".join(str(boid) for boid in self.boids)
+        return "\n".join(str(boid) for boid in self.boids) + "\n-----------------------------------"
 
 
 def create_boids(num_boids: int):
