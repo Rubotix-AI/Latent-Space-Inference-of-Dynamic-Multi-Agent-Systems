@@ -1,9 +1,12 @@
 import numpy as np
+import pandas as pd
+
 np.set_printoptions(precision=2) # displays truncated floats for all numpy vectors
 
 from simulation.boid_config import SEED, NUM_OF_COORDS, NUM_OF_BOIDS,X_BOUND, Y_BOUND
-from simulation.boid_models import Agent, Simulation
 from simulation.boid_config import SEPERATION_RADIUS, SEPERATION_WEIGHT, ALIGNEMENT_RADIUS, ALIGNMENT_WEIGHT, COHESION_RADIUS, COHESION_WEIGHT, WANDER_RADIUS, WANDER_WEIGHT
+from simulation.boid_models import Agent, Simulation
+
 rng = np.random.default_rng(seed=SEED)
 
 def create_boids(num_boids: int) -> list[Agent]:
