@@ -28,8 +28,8 @@ def update(frame):
 ani = FuncAnimation(
     fig,
     update,
-    frames=sorted(df["time"].unique())[::10],
-    interval=20,
+    frames=sorted(df["time"].unique()),
+    interval=30,
     blit=True
 )
 
