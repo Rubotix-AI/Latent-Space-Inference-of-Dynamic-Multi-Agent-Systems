@@ -1,14 +1,7 @@
 import numpy as np
 
-np.set_printoptions(precision=2) # displays truncated floats for all numpy vectors
-
-SEED = 42
-DELTA_T = 1
-MAX_SEPERATION_VALUE = 1
-NUM_OF_BOIDS = 5
-NUM_OF_COORDS = 2
-X_BOUND = 5
-Y_BOUND = 5
+from config import SEED, NUM_OF_COORDS, NUM_OF_BOIDS, MAX_SEPERATION_VALUE, X_BOUND, Y_BOUND, DELTA_T
+from utils import cohesion, alignment, seperation, wrap
 
 rng = np.random.default_rng(seed=SEED)
 
@@ -25,25 +18,6 @@ class Agent:
     Velocity: {self.velocity}
     Wander: {self.wander}"""
 
-def seperation(diff: np.ndarray):
-    return diff / max(np.linalg.norm(diff), MAX_SEPERATION_VALUE)
-
-def alignment(boid: Agent):
-    return boid.velocity
-
-def cohesion(boid: Agent):
-    return boid.position
-
-def wrap(vec: np.ndarray) -> np.ndarray:
-    # shift
-    vec[0] += X_BOUND
-    vec[1] += Y_BOUND
-    # mod
-    vec[0] %= (2 * X_BOUND + 1)
-    vec[1] %= (2 * Y_BOUND + 1)
-    # shift back 
-    vec[0] -= X_BOUND
-    vec[1] -= Y_BOUND
 
 class Simulation:
     def __init__(self, 
@@ -116,35 +90,3 @@ class Simulation:
     
     def __str__(self):
         return "\n".join(str(boid) for boid in self.boids) + "\n-----------------------------------"
-
-
-def create_boids(num_boids: int):
-    all_boids = []
-    for i in range(num_boids):
-        curr = Agent(
-            id=i,
-            pos=rng.uniform(-X_BOUND, X_BOUND, size=(NUM_OF_COORDS,)),
-            vel=rng.uniform(-Y_BOUND, Y_BOUND, size=(NUM_OF_COORDS,)),
-            wander_radius=rng.random()
-        )
-        all_boids.append(curr)
-    
-    return all_boids
-
-boids = create_boids(5)
-sim = Simulation(
-    boids=boids,
-    boid_count=NUM_OF_BOIDS,
-    seperation=0.5,
-    alignment=0.5,
-    cohesion=0.5,
-    wander=0.5,
-    sep_radius=2.,
-    coh_radius=2.,
-    align_radius=2.,
-    wander_radius=1.
-)
-
-for _ in range(10):
-    print(sim)
-    sim.update()
