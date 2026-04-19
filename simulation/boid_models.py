@@ -64,7 +64,7 @@ class Simulation:
             boid.position += DELTA_T * boid.velocity
             wrap(boid.position)
 
-    def calculate_vecs(self, boid: Agent, neighbours: list[Agent]):
+    def calculate_vecs(self, boid: Agent, neighbours: list[Agent]) -> list[np.ndarray]:
         sep_vec = np.zeros_like(boid.velocity)
         align_vec = np.zeros_like(boid.velocity)
         coh_vec = np.zeros_like(boid.position) # same size as velocity so it doesn't matter

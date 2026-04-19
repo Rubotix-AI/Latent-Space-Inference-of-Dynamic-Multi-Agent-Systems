@@ -6,7 +6,7 @@ from simulation.boid_models import Agent, Simulation
 from simulation.boid_config import SEPERATION_RADIUS, SEPERATION_WEIGHT, ALIGNEMENT_RADIUS, ALIGNMENT_WEIGHT, COHESION_RADIUS, COHESION_WEIGHT, WANDER_RADIUS, WANDER_WEIGHT
 rng = np.random.default_rng(seed=SEED)
 
-def create_boids(num_boids: int):
+def create_boids(num_boids: int) -> list[Agent]:
     all_boids = []
     for i in range(num_boids):
         curr = Agent(
