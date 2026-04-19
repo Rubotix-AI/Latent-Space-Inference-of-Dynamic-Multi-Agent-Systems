@@ -22,27 +22,28 @@ def create_boids(num_boids: int) -> list[Agent]:
     
     return all_boids
 
-boids = create_boids(NUM_OF_BOIDS)
-sim = Simulation(
-    boids=boids,
-    boid_count=NUM_OF_BOIDS,
-    seperation=SEPERATION_WEIGHT,
-    alignment=ALIGNMENT_WEIGHT,
-    cohesion=COHESION_WEIGHT,
-    wander=WANDER_WEIGHT,
-    sep_radius=SEPERATION_RADIUS,
-    coh_radius=COHESION_RADIUS,
-    align_radius=ALIGNEMENT_RADIUS,
-    wander_radius=WANDER_RADIUS
-)
+def make_history():
+    boids = create_boids(NUM_OF_BOIDS)
+    sim = Simulation(
+        boids=boids,
+        boid_count=NUM_OF_BOIDS,
+        seperation=SEPERATION_WEIGHT,
+        alignment=ALIGNMENT_WEIGHT,
+        cohesion=COHESION_WEIGHT,
+        wander=WANDER_WEIGHT,
+        sep_radius=SEPERATION_RADIUS,
+        coh_radius=COHESION_RADIUS,
+        align_radius=ALIGNEMENT_RADIUS,
+        wander_radius=WANDER_RADIUS
+    )
 
-columns = ["time", "id", "x", "y", "vx", "vy"]
-rows = []
+    columns = ["time", "id", "x", "y", "vx", "vy"]
+    rows = []
 
-for t in range(TOTAL_TIMESTEPS):
-    rows.extend(sim)
-    sim.update()
+    for t in range(TOTAL_TIMESTEPS):
+        rows.extend(sim)
+        sim.update()
 
-df = pd.DataFrame(data=rows, columns=columns)
+    df = pd.DataFrame(data=rows, columns=columns)
 
-df.to_csv('data/boid_history.csv', index=False)
+    df.to_csv('data/boid_history.csv', index=False)
