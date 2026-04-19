@@ -3,9 +3,9 @@ import pandas as pd
 
 np.set_printoptions(precision=2) # displays truncated floats for all numpy vectors
 
-from simulation.boid_config import SEED, NUM_OF_COORDS, NUM_OF_BOIDS,X_BOUND, Y_BOUND
-from simulation.boid_config import SEPERATION_RADIUS, SEPERATION_WEIGHT, ALIGNEMENT_RADIUS, ALIGNMENT_WEIGHT, COHESION_RADIUS, COHESION_WEIGHT, WANDER_RADIUS, WANDER_WEIGHT
-from simulation.boid_models import Agent, Simulation
+from boid_config import SEED, TOTAL_TIMESTEPS, NUM_OF_COORDS, NUM_OF_BOIDS,X_BOUND, Y_BOUND
+from boid_config import SEPERATION_RADIUS, SEPERATION_WEIGHT, ALIGNEMENT_RADIUS, ALIGNMENT_WEIGHT, COHESION_RADIUS, COHESION_WEIGHT, WANDER_RADIUS, WANDER_WEIGHT
+from boid_models import Agent, Simulation
 
 rng = np.random.default_rng(seed=SEED)
 
@@ -36,6 +36,13 @@ sim = Simulation(
     wander_radius=WANDER_RADIUS
 )
 
-for _ in range(10):
-    print(sim)
+columns = ["time", "id", "x", "y", "vx", "vy"]
+rows = []
+
+for t in range(TOTAL_TIMESTEPS):
+    rows.extend(sim)
     sim.update()
+
+df = pd.DataFrame(data=rows, columns=columns)
+
+df.to_csv('data/boid_history.csv', index=False)
