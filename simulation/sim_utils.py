@@ -21,3 +21,17 @@ def wrap(vec: np.ndarray) -> np.ndarray:
     # shift back 
     vec[0] -= X_BOUND
     vec[1] -= Y_BOUND
+
+def dist_correction(pos: np.ndarray):
+    x, y = pos
+    if x > X_BOUND:
+        x -= X_BOUND
+    if x < -X_BOUND:
+        x += X_BOUND
+
+    if y > Y_BOUND:
+        y -= Y_BOUND
+    if y < -Y_BOUND:
+        y += Y_BOUND
+
+    return np.array([x, y])

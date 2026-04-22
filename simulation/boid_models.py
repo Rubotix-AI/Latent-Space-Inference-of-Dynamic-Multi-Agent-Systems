@@ -1,7 +1,7 @@
 import numpy as np
 
 from boid_config import SEED, NUM_OF_COORDS, DELTA_T
-from sim_utils import cohesion, alignment, seperation, wrap
+from sim_utils import cohesion, alignment, seperation, wrap, dist_correction
 
 rng = np.random.default_rng(seed=SEED)
 
@@ -77,7 +77,9 @@ class Simulation:
             if neighbour == boid: # skip the boid itself
                 continue
             diff = neighbour.position - boid.position
+            diff = dist_correction(diff)
             dist = np.linalg.norm(diff)
+
             if dist < self.r_s:
                 sep_vec -= seperation(diff)
             if dist < self.r_a:
