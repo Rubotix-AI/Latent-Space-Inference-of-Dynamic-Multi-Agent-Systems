@@ -10,6 +10,7 @@ class SimulationConfig:
     dt: float = 0.05
 
     total_timesteps: int = 10000
+    num_agents: int = 50
 
     seed: int = 42
 

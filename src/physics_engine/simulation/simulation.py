@@ -45,15 +45,12 @@ class Simulation:
 
         self.timestep += 1
 
-    def __iter__(self):
+    def snapshot(self) -> list[Agent]:
         """
-        Used for dataset generation.
+        Returns the current state of the simulation.
+
+        The returned agents are live objects and should
+        not be stored. Consume them immediately.
         """
 
-        for agent in self.agents:
-            yield (
-                self.timestep,
-                agent.id,
-                *agent.position,
-                *agent.velocity,
-            )
+        return self.agents
