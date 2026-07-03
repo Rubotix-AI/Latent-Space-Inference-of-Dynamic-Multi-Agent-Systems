@@ -4,8 +4,8 @@ from physics_engine.simulation.agent import Agent
 from physics_engine.simulation.interaction import InteractionLaw
 from physics_engine.simulation.world import World
 
-from config import BoidsConfig
-from utils import alignment, cohesion, separation
+from physics_engine.interaction_laws.classical_boids.config import BoidsConfig
+from physics_engine.interaction_laws.classical_boids.utils import alignment, cohesion, separation
 
 class BoidsInteraction(InteractionLaw):
 

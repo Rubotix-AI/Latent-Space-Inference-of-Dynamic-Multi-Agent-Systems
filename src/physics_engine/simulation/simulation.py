@@ -1,6 +1,6 @@
-from agent import Agent
-from config import SimulationConfig
-from world import World
+from physics_engine.simulation.agent import Agent
+from physics_engine.simulation.config import SimulationConfig
+from physics_engine.simulation.world import World
 
 
 class Simulation:

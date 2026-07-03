@@ -4,8 +4,8 @@ from physics_engine.simulation.agent import Agent, AgentType
 from physics_engine.simulation.interaction import InteractionLaw
 from physics_engine.simulation.world import World
 
-from config import PredatorPreyConfig
-from utils import (
+from physics_engine.interaction_laws.predator_prey.config import PredatorPreyConfig
+from physics_engine.interaction_laws.predator_prey.utils import (
     alignment,
     chase,
     cohesion,

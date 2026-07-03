@@ -30,4 +30,4 @@ def damping_force(
     Simple viscous damping.
     """
 
-    return -damping * relative_velocity
+    return damping * relative_velocity

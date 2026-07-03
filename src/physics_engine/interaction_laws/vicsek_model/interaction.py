@@ -4,8 +4,8 @@ from physics_engine.simulation.agent import Agent
 from physics_engine.simulation.interaction import InteractionLaw
 from physics_engine.simulation.world import World
 
-from config import VicsekConfig
-from utils import (
+from physics_engine.interaction_laws.vicsek_model.config import VicsekConfig
+from physics_engine.interaction_laws.vicsek_model.utils import (
     average_heading,
     rotate,
 )

@@ -1,10 +1,11 @@
 
 from pathlib import Path
-
+import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.animation import FuncAnimation
 
+from physics_engine.simulation.config import SimulationConfig as simulation_config
 
 def visualize(
     trajectory_path: str | Path,
@@ -21,18 +22,17 @@ def visualize(
 
     ax.set_title(interaction_name.replace("_", " ").title())
 
-    x_min = df["x"].min()
-    x_max = df["x"].max()
+    ax.set_xlim(
+        -simulation_config.world_width / 2,
+        simulation_config.world_width / 2,
+    )
 
-    y_min = df["y"].min()
-    y_max = df["y"].max()
+    ax.set_ylim(
+        -simulation_config.world_height / 2,
+        simulation_config.world_height / 2,
+    )
 
-    padding = 0.5
-
-    ax.set_xlim(x_min - padding, x_max + padding)
-    ax.set_ylim(y_min - padding, y_max + padding)
-
-    ax.set_aspect("equal")
+    # ax.set_aspect("equal")
 
     scatter = ax.scatter([], [])
 
@@ -55,7 +55,7 @@ def visualize(
 
     def init():
 
-        scatter.set_offsets([])
+        scatter.set_offsets(np.zeros((0, 2)))
 
         timestep_text.set_text("")
 

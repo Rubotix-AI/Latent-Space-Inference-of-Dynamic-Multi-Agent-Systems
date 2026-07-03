@@ -110,17 +110,17 @@ def create_dataset(
 
 if __name__ == "__main__":
 
-    from physics_engine.interaction_laws.classical_boids.config import (
-        BoidsConfig,
+    from physics_engine.interaction_laws.spring_network.config import (
+        SpringNetworkConfig,
     )
 
     simulation_config = SimulationConfig()
 
-    boids_config = BoidsConfig()
+    leader_config = SpringNetworkConfig()
 
     create_dataset(
-        interaction_name="classical_boids",
+        interaction_name="spring_network",
         simulation_config=simulation_config,
-        interaction_config=boids_config,
+        interaction_config=leader_config,
         trajectory_id=0,
     )

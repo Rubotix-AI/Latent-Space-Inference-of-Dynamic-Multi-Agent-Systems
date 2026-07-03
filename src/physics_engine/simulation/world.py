@@ -1,6 +1,6 @@
 import numpy as np
 
-from config import SimulationConfig
+from physics_engine.simulation.config import SimulationConfig
 
 
 class World:

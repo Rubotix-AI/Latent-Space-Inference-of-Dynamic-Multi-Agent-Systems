@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from agent import Agent
-from world import World
+from physics_engine.simulation.agent import Agent
+from physics_engine.simulation.world import World
 
 
 class InteractionLaw(ABC):

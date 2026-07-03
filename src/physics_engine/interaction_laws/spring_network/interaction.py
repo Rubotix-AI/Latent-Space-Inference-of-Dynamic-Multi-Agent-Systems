@@ -5,8 +5,8 @@ from physics_engine.simulation.interaction import InteractionLaw
 from physics_engine.simulation.spring import Spring
 from physics_engine.simulation.world import World
 
-from config import SpringNetworkConfig
-from utils import (
+from physics_engine.interaction_laws.spring_network.config import SpringNetworkConfig
+from physics_engine.interaction_laws.spring_network.utils import (
     spring_force,
     damping_force,
 )
