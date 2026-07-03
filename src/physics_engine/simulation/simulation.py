@@ -28,6 +28,8 @@ class Simulation:
         """
         Advance the simulation by one timestep.
         """
+        for agent in self.agents:
+            agent.reset_acceleration()
 
         # Interaction law computes all accelerations
         self.interaction.step(self.agents, self.world)

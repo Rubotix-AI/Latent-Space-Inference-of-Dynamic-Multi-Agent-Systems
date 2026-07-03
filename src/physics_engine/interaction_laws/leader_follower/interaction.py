@@ -108,7 +108,7 @@ class LeaderFollowerInteraction(InteractionLaw):
 
             wander = self._update_wander(agent)
 
-            agent.acceleration = (
+            agent.acceleration += (
                 self.w_sep * separation_force
                 + self.w_pos * attraction_force
                 + self.w_vel * alignment_force

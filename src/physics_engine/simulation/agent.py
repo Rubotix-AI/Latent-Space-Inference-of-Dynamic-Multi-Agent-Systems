@@ -1,5 +1,10 @@
 from dataclasses import dataclass, field
 import numpy as np
+from enum import Enum
+
+class AgentType(Enum):
+    PREDATOR = "predator"
+    PREY = "prey"
 
 @dataclass
 class Agent:
@@ -8,6 +13,7 @@ class Agent:
     """
 
     id: int
+    type: AgentType
     position: np.ndarray
     velocity: np.ndarray
     acceleration: np.ndarray = field(default_factory=lambda: np.zeros(2))

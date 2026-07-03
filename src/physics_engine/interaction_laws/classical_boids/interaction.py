@@ -76,7 +76,7 @@ class BoidsInteraction(InteractionLaw):
 
             wander = self._update_wander(agent)
 
-            agent.acceleration = (
+            agent.acceleration += (
                 self.w_sep * sep
                 + self.w_align * align
                 + self.w_coh * coh
