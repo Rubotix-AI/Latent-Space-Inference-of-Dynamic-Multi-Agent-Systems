@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-from boid_config import X_BOUND, Y_BOUND
+from config import X_BOUND, Y_BOUND
 from make_boid_history import make_history
 
 # make_history()
@@ -14,7 +14,7 @@ scat = ax.scatter([], [])
 ax.set_xlim(-X_BOUND, X_BOUND)
 ax.set_ylim(-Y_BOUND, Y_BOUND)
 
-df = pd.read_csv('../data/boid_history.csv')
+df = pd.read_csv('data/boid_history.csv')
 grouped = df.groupby('time')
 
 def update(frame):
