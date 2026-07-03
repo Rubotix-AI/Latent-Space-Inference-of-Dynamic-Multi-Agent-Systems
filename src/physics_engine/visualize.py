@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.animation import FuncAnimation
 
-from physics_engine.simulation.config import SimulationConfig as simulation_config
+from physics_engine.simulation.config import SimulationConfig
+
+simulation_config = SimulationConfig()
 
 def visualize(
     trajectory_path: str | Path,
@@ -101,7 +103,13 @@ def visualize(
 
 
 if __name__ == "__main__":
+    SRC_DIR = Path(__file__).resolve().parent.parent
+
+    DATA_DIR = SRC_DIR / "data"
+
+    trajectory_dir = DATA_DIR / "trajectories"
+    metadata_dir = DATA_DIR / "metadata"
 
     visualize(
-        "data/trajectories/trajectory_000000.csv"
+        trajectory_dir / "trajectory_000000.csv"
     )

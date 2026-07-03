@@ -59,8 +59,12 @@ def create_dataset(
 
     if save:
 
-        trajectory_dir = Path("data/trajectories")
-        metadata_dir = Path("data/metadata")
+        SRC_DIR = Path(__file__).resolve().parent.parent
+
+        DATA_DIR = SRC_DIR / "data"
+
+        trajectory_dir = DATA_DIR / "trajectories"
+        metadata_dir = DATA_DIR / "metadata"
 
         trajectory_dir.mkdir(
             parents=True,
