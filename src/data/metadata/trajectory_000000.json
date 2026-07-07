@@ -1,0 +1,25 @@
+{
+    "trajectory_id": 0,
+    "interaction": "predator_prey",
+    "seed": 42,
+    "timesteps": 5000,
+    "num_agents": 25,
+    "world_width": 10.0,
+    "world_height": 10.0,
+    "interaction_config": {
+        "predator_chase_weight": 0.75,
+        "prey_escape_weight": 0.8,
+        "prey_separation_weight": 0.15,
+        "prey_alignment_weight": 0.15,
+        "prey_cohesion_weight": 0.35,
+        "wander_weight": 0.2,
+        "predator_detection_radius": 6.0,
+        "prey_detection_radius": 4.0,
+        "separation_radius": 1.0,
+        "alignment_radius": 1.0,
+        "cohesion_radius": 0.5,
+        "wander_radius": 1.5,
+        "wander_noise": 0.05,
+        "max_separation_strength": 0.5
+    }
+}
